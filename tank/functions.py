@@ -53,7 +53,7 @@ def create_opp(game_settings, screen, opps, opp_number,row_number):
     """Create an opp tank and place it in the column."""
     opp= Opp(game_settings, screen)
     opp_height = opp.rect.height
-    """each alien is pushed down one alien height and we multiply by one
+    """each tank is pushed down one tank height and we multiply by 1.5
     to account for space taken up by half of each tank"""
     opp.y = opp_height + 1.5* opp_height * opp_number
     opp.rect.y = opp.y
