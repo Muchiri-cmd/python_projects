@@ -4,7 +4,7 @@ from pygame.sprite import Sprite
 
 class Opp(Sprite):
     def __init__(self,game_settings,screen):
-        """initialize tank and its start position"""
+        #initialize tank and its start position
         super().__init__()
         self.screen=screen
         self.game_settings=game_settings
