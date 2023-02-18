@@ -57,7 +57,7 @@ def create_opp(game_settings, screen, opps, opp_number,row_number):
     to account for space taken up by half of each tank"""
     opp.y = opp_height + 1.5* opp_height * opp_number
     opp.rect.y = opp.y
-    """each tank is pushed 1 tank width from the next and we multiply by 2 
+    """each tank is pushed 5 tank width's from the next and we multiply by 2 
     to account for space taken by each including spacing"""
     opp.x=opp.rect.width*5+ 2 * opp.rect.width * row_number
     opp.rect.x=opp.x
