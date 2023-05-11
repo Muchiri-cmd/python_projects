@@ -59,11 +59,10 @@ def check_events(ai_settings,screen,stats,sb,play_button,ship,aliens,bullets):
     check_keyup_events(event,ship)
    elif event.type==pygame.MOUSEBUTTONDOWN:
     mouse_x,mouse_y=pygame.mouse.get_pos()
-    check_play_button(ai_settings,screen,stats,play_button,ship,sb,
-    aliens,bullets,mouse_x,mouse_y)
+    check_play_button(play_button,mouse_x,mouse_y,stats,ai_settings,sb,screen,ship,aliens,bullets)
 
-def check_play_button(ai_settings,screen,stats,sb,play_button,ship,
-aliens,bullets,mouse_x,mouse_y):
+def check_play_button(play_button,mouse_x,mouse_y,stats,ai_settings,sb,screen,ship,
+aliens,bullets):
   #respond to mouse presses
   button_clicked=play_button.rect.collidepoint(mouse_x,mouse_y)
   if button_clicked and not stats.game_active:
@@ -71,7 +70,7 @@ aliens,bullets,mouse_x,mouse_y):
     ai_settings.initialize_dynamic_settings()
     play_game(stats,sb,aliens,bullets,ai_settings,screen,ship)
 
-def update_bullets(ai_settings,screen,stats,sb,ship,aliens,bullets):
+def update_bullets(bullets,aliens,stats,ai_settings,sb,screen,ship):
   #update position of bullets and get rid of old bullets 
   #update bullet position
   bullets.update()
@@ -79,36 +78,36 @@ def update_bullets(ai_settings,screen,stats,sb,ship,aliens,bullets):
   for bullet in bullets.copy():
    if bullet.rect.bottom<=0:
     bullets.remove(bullet)
-  
   #check for bullets that hit an alien.If there are remove bullet and alien
-  check_bullet_alien_collision(ai_settings, screen,stats,sb ,ship, aliens, bullets)
+  check_bullet_alien_collision(bullets,aliens,stats,ai_settings,sb,screen,ship)
 
+def check_bullet_alien_collision(bullets,aliens,stats,ai_settings,sb,screen,ship):
+  #respond to bullet alien collisions
+  collisions=pygame.sprite.groupcollide(bullets,aliens,True,True)
+  start_new_level(aliens,bullets,ai_settings,screen,ship,stats,sb)
+  if collisions:
+    for aliens in collisions.values():
+      stats.score+= ai_settings.alien_points*len(aliens)
+      sb.prep_score()
+    check_high_score(stats,sb)
+    
 def check_high_score(stats,sb):
   #Check to see if there's a new high score.
   if stats.score > stats.high_score:
     stats.high_score = stats.score
     sb.prep_high_score()
 
-def check_bullet_alien_collision(ai_settings,screen,stats,sb,ship,aliens,bullets):
-  #respond to bullet alien collisions
-  collisions=pygame.sprite.groupcollide(bullets,aliens,True,True)
-  if collisions:
-    for aliens in collisions.values():
-      stats.score+= ai_settings.alien_points*len(aliens)
-      sb.prep_score()
-    check_high_score(stats,sb)
-    start_new_level(aliens,bullets,ai_settings,stats,sb,screen,ship)
 
-def start_new_level(aliens,bullets,ai_settings,stats,sb,screen,ship):
-  if len(aliens)==0:
+def start_new_level(aliens,bullets,ai_settings,screen,ship,stats,sb):
+  if len(aliens) == 0:
     #destroy existing bullets and create new fleet
     #if the whole fleet is destroyed,start a new level
     bullets.empty()
-    ai_settings.increase_speed()
+    create_fleet(ai_settings,screen,ship,aliens)
     #increase level
+    ai_settings.increase_speed()
     stats.level+=1
     sb.prep_level()
-    create_fleet(ai_settings,screen,ship,aliens)
 
 def get_number_aliens_x(ai_settings, alien_width):
  """Determine the number of aliens that fit in a row."""
@@ -193,8 +192,7 @@ def update_screen(ai_settings,screen,stats,sb,ship,aliens,bullets,play_button):
  #Draw play button if game is inactive
  if not stats.game_active:
   play_button.draw_button()
-
- # Make the most recently drawn screen visible.
+  # Make the most recently drawn screen visible.
  pygame.display.flip()
 
 def ship_hit(ai_settings,screen,stats,sb,ship,aliens,bullets):
@@ -215,7 +213,6 @@ def ship_hit(ai_settings,screen,stats,sb,ship,aliens,bullets):
   else:
     stats.game_active=False
     pygame.mouse.set_visible(True)
-
 
 def check_aliens_bottom(ai_settings,screen,stats,sb,ship,aliens,bullets):
   #check if any aliens have reached the bottom of the screen

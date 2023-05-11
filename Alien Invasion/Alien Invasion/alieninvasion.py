@@ -39,7 +39,7 @@ def run_game():
 		gf.check_events(ai_settings,screen,stats,sb,play_button,ship,aliens,bullets)
 		if stats.game_active:
 			ship.update()
-			gf.update_bullets(ai_settings,screen,stats,sb,ship,aliens,bullets)
+			gf.update_bullets(bullets,aliens,stats,ai_settings,sb,screen,ship)
 			gf.update_aliens(ai_settings,screen,stats,sb,ship,aliens,bullets)
 		
 		#Make the most recently drawn screen available

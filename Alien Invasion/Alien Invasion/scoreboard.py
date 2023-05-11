@@ -12,6 +12,7 @@ class Scoreboard():
     # Font settings for scoring information.
     self.text_color = (30, 30, 30)
     self.font = pygame.font.SysFont(None, 48)
+
     # Prepare the initial score image.
     self.prep_score()
     self.prep_high_score()
@@ -57,9 +58,6 @@ class Scoreboard():
      ship.rect.x = 10 + ship_number * ship.rect.width
      ship.rect.y = 10
      self.ships.add(ship)
-
-
-
 
  def show_score(self):
     #show score and level to the screen.
