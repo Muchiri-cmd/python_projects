@@ -1,3 +1,3 @@
 # learningpython
 This includes all mini projects learning python. 
-most of them are exercises from the book python crash course
+They include example APIs,some 2d games and a web application blog which users can make topical posts about anything on their account.
