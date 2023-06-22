@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'learning_logs',
     'users',
+    #third party
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -148,3 +150,8 @@ if os.getcwd()=='/app': #gets working dir
     STATICFILES_DIRS=(
         os.path.join(BASE_DIR,'static')
     )
+
+#settings
+BOOTSTRAP3={
+    'include_jquery':True,
+}
