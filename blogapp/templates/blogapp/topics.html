@@ -1,6 +1,7 @@
 {% extends "blogapp/base.html" %}
 
 {% block content %}
+<<<<<<< HEAD
     <div class="container">
         <p class="descr">Blog about any topic of your choice...</p>
         <div class="topic-list">
@@ -106,4 +107,22 @@
             background-color: #45a049;
         }
     </style>
+=======
+    <div class="topic-list">
+        <h2>Topics:</h2>
+
+        {% if topics %}
+            <ul class="topic-list__items">
+                {% for topic in topics %}
+                    <li class="topic-list__item">
+                        <a href="{%url 'blogapp:topic' topic.id %}">{{topic}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="topic-list__empty">No topics have been added yet.</p>
+        {% endif %}
+        <a href="{% url 'blogapp:new_topic' %}">Add a new topic:</a>
+    </div>
+>>>>>>> aecf3b8f20cf3b4e6b08ba79e5e6ac054ba1aace
 {% endblock content %}

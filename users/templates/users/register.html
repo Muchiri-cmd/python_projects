@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> aecf3b8f20cf3b4e6b08ba79e5e6ac054ba1aace
 {% extends "blogapp/base.html" %}
 {% block content %}
 <form method="post" action="{% url 'users:register' %}">
@@ -6,4 +10,17 @@
 <button name="submit">register</button>
 <input type="hidden" name="next" value="{% url 'blogapp:index' %}" />
 </form>
+<<<<<<< HEAD
+=======
+=======
+{% extends "learning_logs/base.html" %}
+{% block content %}
+    <form method="post" action="{% url 'users:register' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <button name="submit">register</button>
+    <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
+    </form>
+>>>>>>> feea372ff8d2b558b178edc6f857898fb38b1e6f
+>>>>>>> aecf3b8f20cf3b4e6b08ba79e5e6ac054ba1aace
 {% endblock content %}

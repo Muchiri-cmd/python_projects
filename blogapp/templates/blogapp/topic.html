@@ -2,17 +2,26 @@
 
 {% block content %}
     <div class="topic-details">
+<<<<<<< HEAD
         <p><a href="{% url 'blogapp:topics' %}">&larr; Back to Topics</a></p> 
+=======
+        <p><a href="{% url 'blogapp:topics' %}">Topics</a></p> 
+>>>>>>> aecf3b8f20cf3b4e6b08ba79e5e6ac054ba1aace
         <h2>Topic: {{ topic }}</h2>
 
         <h3>Posts:</h3>
         <p>
+<<<<<<< HEAD
             <a href="{% url 'blogapp:new_post' topic.id %}" class="btn btn-primary">Add New Post</a>
+=======
+            <a href="{% url 'blogapp:new_post' topic.id %}">add new post</a>
+>>>>>>> aecf3b8f20cf3b4e6b08ba79e5e6ac054ba1aace
         </p>
 
         {% if posts %}
             <ul class="post-list">
                 {% for post in posts %}
+<<<<<<< HEAD
                     <li class="post-list_item">
                         <div class="post-header">
                             <p class="post-list_date">Posted On: {{ post.publication_date|date:'M d, Y H:i' }}</p>
@@ -26,6 +35,19 @@
                 {% empty %}
                     <li class="post-list_item">
                         <p>There are no posts for this topic yet.</p>
+=======
+                    <li class="post-list__item">
+                        <p class="post-list__date">Posted On:{{ post.publication_date|date:'M d, Y H:i' }}</p>
+                        <p class="post-title">Title:{{post.title}}</p>
+                        <p class="post-list__text">{{ post.post|linebreaks }}</p>
+                        <p>
+                            <a href="{% url 'blogapp:edit_post' post.id %}">edit post</a>
+                        </p>
+                    </li>
+                {% empty %}
+                    <li class="post-list__item">
+                        <p>There are no post for this topic yet.</p>
+>>>>>>> aecf3b8f20cf3b4e6b08ba79e5e6ac054ba1aace
                     </li>
                 {% endfor %}
             </ul>
@@ -33,6 +55,7 @@
             <p>No posts found.</p>
         {% endif %}
     </div>
+<<<<<<< HEAD
 
     <style>
         .topic-details {
@@ -77,4 +100,6 @@
             background-color: #0056b3;
         }
     </style>
+=======
+>>>>>>> aecf3b8f20cf3b4e6b08ba79e5e6ac054ba1aace
 {% endblock content %}
