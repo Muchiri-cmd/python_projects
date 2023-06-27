@@ -1,0 +1,80 @@
+{% extends 'blogapp/base.html' %}
+
+{% block content %}
+    <div class="topic-details">
+        <p><a href="{% url 'blogapp:topics' %}">&larr; Back to Topics</a></p> 
+        <h2>Topic: {{ topic }}</h2>
+
+        <h3>Posts:</h3>
+        <p>
+            <a href="{% url 'blogapp:new_post' topic.id %}" class="btn btn-primary">Add New Post</a>
+        </p>
+
+        {% if posts %}
+            <ul class="post-list">
+                {% for post in posts %}
+                    <li class="post-list_item">
+                        <div class="post-header">
+                            <p class="post-list_date">Posted On: {{ post.publication_date|date:'M d, Y H:i' }}</p>
+                            <h4 class="post-title">{{ post.title }}</h4>
+                        </div>
+                        <p class="post-list_text">{{ post.post|linebreaks }}</p>
+                        <p class="post-actions">
+                            <a href="{% url 'blogapp:edit_post' post.id %}" class="btn btn-secondary">Edit Post</a>
+                        </p>
+                    </li>
+                {% empty %}
+                    <li class="post-list_item">
+                        <p>There are no posts for this topic yet.</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No posts found.</p>
+        {% endif %}
+    </div>
+
+    <style>
+        .topic-details {
+            margin: 20px;
+        }
+
+        .post-header {
+            margin-bottom: 10px;
+        }
+
+        .post-list_date {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .post-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 0;
+            text-decoration:underline;
+        }
+
+        .post-list_text {
+            margin-bottom: 15px;
+        }
+
+        .post-actions {
+            margin-top: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+{% endblock content %}
