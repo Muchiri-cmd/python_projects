@@ -1,0 +1,34 @@
+{% extends 'blogapp/base.html' %}
+
+{% block content %}
+    <div class="topic-details">
+        <p><a href="{% url 'blogapp:topics' %}">Topics</a></p> 
+        <h2>Topic: {{ topic }}</h2>
+
+        <h3>Posts:</h3>
+        <p>
+            <a href="{% url 'blogapp:new_post' topic.id %}">add new post</a>
+        </p>
+
+        {% if posts %}
+            <ul class="post-list">
+                {% for post in posts %}
+                    <li class="post-list__item">
+                        <p class="post-list__date">Posted On:{{ post.publication_date|date:'M d, Y H:i' }}</p>
+                        <p class="post-title">Title:{{post.title}}</p>
+                        <p class="post-list__text">{{ post.post|linebreaks }}</p>
+                        <p>
+                            <a href="{% url 'blogapp:edit_post' post.id %}">edit post</a>
+                        </p>
+                    </li>
+                {% empty %}
+                    <li class="post-list__item">
+                        <p>There are no post for this topic yet.</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No posts found.</p>
+        {% endif %}
+    </div>
+{% endblock content %}

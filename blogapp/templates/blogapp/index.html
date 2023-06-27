@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Blog - Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 36px;
+            margin: 0;
+            padding: 10px 0;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #777;
+            margin-top: 10px;
+        }
+
+        .content {
+            margin-bottom: 40px;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .content p {
+            font-size: 16px;
+            color: #777;
+            line-height: 1.5;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <li><a href="{% url 'blogapp:topics' %}">Topics</a></li> 
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            {% if user.is_authenticated %}
+                Hello, {{ user.username }}.
+                <a href="{% url 'users:logout' %}">log out</a>
+            {% else %}
+                <a href="{% url 'users:login' %}">log in</a>
+                <a href="{% url 'users:register' %}">register</a>
+            {% endif %}
+            
+            
+            <h1>Welcome to My Blog</h1>
+            <p>Share your thoughts, insights, and stories with the world.</p>
+        </div>
+        
+        <div class="content">
+            
+            <h2>Get Inspired</h2>
+            <p>Explore a diverse range of topics and read captivating articles written by our community of passionate bloggers. From technology and travel to arts and culture, there's something for everyone.</p>
+            
+            <h2>Join Our Community</h2>
+            <p>Start your blogging journey today and become part of our vibrant community. Share your unique perspectives, connect with like-minded individuals, and engage in meaningful discussions.</p>
+            
+            
+        </div>
+        
+        <div class="footer">
+            &copy; 2023 My Blog. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>

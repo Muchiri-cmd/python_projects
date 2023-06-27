@@ -1,0 +1,38 @@
+{% extends "blogapp/base.html" %}
+
+{% block content %}
+    <h2>Login</h2>
+    
+    <form method="post" action="{% url 'users:login' %}">
+        {% csrf_token %}
+        
+        {% if form.errors %}
+            <div class="error-message">
+                <p>Your username and password didn't match. Please try again.</p>
+            </div>
+        {% endif %}
+        
+        <fieldset>
+            <legend>Login Information</legend>
+            
+            <div class="form-field">
+                <label for="{{ form.username.id_for_label }}">Username:</label>
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <div class="error-message">{{ form.username.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-field">
+                <label for="{{ form.password.id_for_label }}">Password:</label>
+                {{ form.password }}
+                {% if form.password.errors %}
+                    <div class="error-message">{{ form.password.errors }}</div>
+                {% endif %}
+            </div>
+        </fieldset>
+        
+        <button type="submit">Log In</button>
+        <input type="hidden" name="next" value="{% url 'blogapp:index' %}" />
+    </form>
+{% endblock content %}

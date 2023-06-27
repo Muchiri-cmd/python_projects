@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Site</title>
+
+</head>
+<body>
+    <header>
+        <h1>Blog</h1>
+        
+    </header>
+
+    <nav>
+        <li><a href="{% url 'blogapp:index' %}">Home</a></li>
+        
+
+    </nav>
+
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+
+    <footer>
+        
+    </footer>
+</body>
+</html>
